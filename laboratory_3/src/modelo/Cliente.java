@@ -11,7 +11,12 @@ Version 1.0
 
 package modelo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import vista.Nuevo;
 
 public class Cliente {
     static int proximoId = 1;
@@ -114,5 +119,24 @@ public class Cliente {
     public void setDatos(Object dato) {
         datos.add(dato);
     }
+ 
     
+    
+    public static void archivoCSV() {
+
+        FileWriter archivo = null;
+        boolean error = false;
+        
+        
+        try {
+            archivo = new FileWriter("datos.csv", null);
+        } catch (IOException e) {
+            error = true;
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al intentar crear el archivo 'datos.csv'");
+        }
+        
+        if (!error) {
+             
+        }
+    }
 }
