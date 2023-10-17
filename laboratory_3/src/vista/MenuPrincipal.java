@@ -11,6 +11,9 @@ Version 2.0
 
 package vista;
 
+import modelo.Cliente;
+import controlador.ControlMenuPrincipal;
+
 // import org.jfree.chart.ChartFactory;
 // import org.jfree.chart.ChartPanel;
 // import org.jfree.chart.JFreeChart;
@@ -29,7 +32,7 @@ import javax.swing.JTextField;
 
 public class MenuPrincipal extends JFrame {
     
-    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnListados;
+    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnLogin, btnListados;
     public JLabel jlTexto;
     public ArrayList<Cliente> clients = new ArrayList<>();
     
@@ -55,28 +58,37 @@ public class MenuPrincipal extends JFrame {
         add(jlTexto);
         
         btnReserva = new JButton("Nuevo");
+<<<<<<< HEAD
         btnReserva.setBounds(100, 180, 300, 50);
+=======
+        btnReserva.setBounds(100, 230, 300, 50);
+>>>>>>> e87a26ed350c3810899199f8d3a3936eca8d44e3
         btnReserva.addActionListener(cmm);
         add(btnReserva);
         
         btnConsultar = new JButton("Consultar");
+<<<<<<< HEAD
         btnConsultar.setBounds(100,260,300,50);
+=======
+        btnConsultar.setBounds(100,310,300,50);
+>>>>>>> e87a26ed350c3810899199f8d3a3936eca8d44e3
         btnConsultar.addActionListener(cmm);
         add(btnConsultar);
         
         btnActualizar = new JButton("Actualizar");
-        btnActualizar.setBounds(100,310,300,50);
+        btnActualizar.setBounds(100,390,300,50);
         btnActualizar.addActionListener(cmm);
         add(btnActualizar);
         
         btnAcerca = new JButton("Acerca de");
-        btnAcerca.setBounds(100, 390, 300, 50);
+        btnAcerca.setBounds(100, 470, 300, 50);
         btnAcerca.addActionListener(cmm);
         add(btnAcerca);
     }
     
     public static void main(String[] args) {
-        MenuPrincipal obj = new MenuPrincipal();
+        Login login = new Login();
+        //MenuPrincipal obj = new MenuPrincipal();
     }
 }
 
