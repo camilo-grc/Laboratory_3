@@ -16,11 +16,12 @@ package vista;
 // import org.jfree.chart.JFreeChart;
 //import org.jfree.data.category.DefaultCategoryDataset;
 
+import modelo.Cliente;
+import controlador.ControlMenuPrincipal;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.util.ArrayList;
-import modelo.Cliente;
-import controlador.ControlMenuPrincipal;
 import java.awt.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

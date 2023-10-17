@@ -11,6 +11,9 @@ Version 1.0
 
 package vista;
 
+import modelo.Cliente;
+import vista.MenuPrincipal;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -29,8 +32,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.border.EtchedBorder;
-import modelo.Cliente;
-import vista.MenuPrincipal;
+
 
 public class Nuevo extends JFrame {
 
