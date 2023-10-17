@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 
 public class MenuPrincipal extends JFrame {
     
-    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnLogueo, btnListados;
+    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnListados;
     public JLabel jlTexto;
     public ArrayList<Cliente> clients = new ArrayList<>();
     
@@ -52,19 +52,14 @@ public class MenuPrincipal extends JFrame {
         jlTexto.setHorizontalAlignment(JLabel.CENTER);
         jlTexto.setFont(new Font("Tahoma", Font.BOLD, 30));
         add(jlTexto);
-     
-        btnLogueo = new JButton("Logueo");
-        btnLogueo.setBounds(100, 100, 300, 50);
-        btnLogueo.addActionListener(cmm);
-        add(btnLogueo);
         
         btnReserva = new JButton("Nuevo");
-        btnReserva.setBounds(100, 180, 300, 50);
+        btnReserva.setBounds(100, 150, 300, 50);
         btnReserva.addActionListener(cmm);
         add(btnReserva);
         
         btnConsultar = new JButton("Consultar");
-        btnConsultar.setBounds(100,260,300,50);
+        btnConsultar.setBounds(100,230,300,50);
         btnConsultar.addActionListener(cmm);
         add(btnConsultar);
         
