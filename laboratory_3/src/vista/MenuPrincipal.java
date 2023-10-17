@@ -19,6 +19,9 @@ import controlador.ControlMenuPrincipal;
 // import org.jfree.chart.JFreeChart;
 //import org.jfree.data.category.DefaultCategoryDataset;
 
+import modelo.Cliente;
+import controlador.ControlMenuPrincipal;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.util.ArrayList;
