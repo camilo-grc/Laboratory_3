@@ -23,7 +23,6 @@ public class Cliente {
     int id;
     String nombre, checkin, checkout, correo, habitacion;
     boolean actividad;
-    public ArrayList<Object> datos = new ArrayList<>();
     
     public Cliente() {
         id = proximoId;
@@ -40,7 +39,6 @@ public class Cliente {
 
     public void setId(int _id){
         id = _id;
-        datos.add(id);
     }
     
 //------------------------------------------------------------------------------
@@ -52,7 +50,6 @@ public class Cliente {
     
     public void setHabitacion(String _habitacion) {
         habitacion = _habitacion;
-        datos.add(habitacion);
     }
 
 //------------------------------------------------------------------------------
@@ -63,7 +60,6 @@ public class Cliente {
 
     public void setNombre(String _nombre){
         nombre = _nombre;
-        datos.add(nombre);
     }
     
 //------------------------------------------------------------------------------
@@ -74,7 +70,6 @@ public class Cliente {
     
     public void setCheckIn(String _checkin){
         checkin = _checkin;
-        datos.add(checkin);
     }
     
 //------------------------------------------------------------------------------    
@@ -85,7 +80,6 @@ public class Cliente {
     
     public void setCorreo(String _correo){
         correo = _correo;
-        datos.add(correo);
     }
     
 //------------------------------------------------------------------------------    
@@ -96,7 +90,6 @@ public class Cliente {
     
     public void setActividad(boolean _actividad){
         actividad = _actividad;
-        datos.add(actividad);
     }
     
 //------------------------------------------------------------------------------    
@@ -107,36 +100,5 @@ public class Cliente {
     
     public void setCheckOut(String _checkout){
         checkout = _checkout;
-        datos.add(checkout);
-    }
-    
-//------------------------------------------------------------------------------    
-    
-    public ArrayList<Object> getDatos() {
-        return datos;
-    }
-
-    public void setDatos(Object dato) {
-        datos.add(dato);
-    }
- 
-    
-    
-    public static void archivoCSV() {
-
-        FileWriter archivo = null;
-        boolean error = false;
-        
-        
-        try {
-            archivo = new FileWriter("datos.csv", null);
-        } catch (IOException e) {
-            error = true;
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al intentar crear el archivo 'datos.csv'");
-        }
-        
-        if (!error) {
-             
-        }
-    }
+    } 
 }

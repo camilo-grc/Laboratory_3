@@ -41,11 +41,11 @@ public class Actualizar extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
 
-        createGUI();
+        //createGUI();
 
         setVisible(true);
     }
-
+/*
     public void createGUI() {
         JLabel titleLabel = new JLabel("Modificar Cliente");
         titleLabel.setBounds(0, 0, 400, 50); // Ajustado el ancho y posición
@@ -210,4 +210,5 @@ public class Actualizar extends JFrame {
             }
         }
     }
+*/
 }

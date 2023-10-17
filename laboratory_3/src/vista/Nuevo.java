@@ -21,6 +21,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,12 +38,9 @@ import javax.swing.border.EtchedBorder;
 
 
 public class Nuevo extends JFrame {
-    
-    public static boolean archivoCreado = false;
   
     MenuPrincipal mm;
     public JButton btnGuardarReserva, btnLimpiarReserva, btnVolver;
-    public static ArrayList<ArrayList<Object>> clientes = new ArrayList<>();
 
     JTextField textField1, textField2, textField3, fecha, fecha2;
     public static String[] opciones = {"Individual", "Doble", "Matrimonial", "Suite"};
@@ -64,10 +62,6 @@ public class Nuevo extends JFrame {
     }
 
     public void createGUI() {
-        
-        if (archivoCreado == false) {
-            Cliente.crearArchivoCSV();
-        }
         
         JLabel jl = new JLabel("Reservación");
         ImageIcon icon = new ImageIcon(getClass().getResource("../imgs/user.png"));
@@ -182,7 +176,7 @@ public class Nuevo extends JFrame {
         });
 
         btnGuardarReserva.addActionListener((ActionEvent e) -> {
-            crearCliente();
+            reservarCliente();
 
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea hacer otro registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -210,26 +204,6 @@ public class Nuevo extends JFrame {
         });
     }
 
-    public void crearCliente() {
-        Cliente cliente = new Cliente();
-        String nombre = textField1.getText();
-        String correo = textField3.getText();
-        String habitacion = comboBox.getSelectedItem().toString();
-        String checkIn = fecha.getText();
-        String checkOut = fecha2.getText();
-
-        // Obtener el ID del TextField
-        int id = Integer.parseInt(textField2.getText());
-        cliente.setId(id);
-        cliente.setNombre(nombre);
-        cliente.setCorreo(correo);
-        cliente.setHabitacion(habitacion);
-        cliente.setCheckIn(checkIn); // Establecer fecha de check-in
-        cliente.setCheckOut(checkOut); // Establecer fecha de check-out
-
-        clientes.add(cliente.getDatos());
-    }
-
     private static int generateNextId() {
         return ++lastGeneratedId; // Incrementar y devolver el ID siguiente
     }
@@ -248,7 +222,43 @@ public class Nuevo extends JFrame {
         return null;
     }
     
-    
+    public void reservarCliente() {
+
+        FileWriter archivo = null;
+        boolean error = false;
+        
+        
+        try {
+            archivo = new FileWriter("datos.csv", true);
+        } catch (IOException e) {
+            error = true;
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al intentar crear el archivo 'datos.csv'");
+        }
+        
+        if (!error) {
+            
+            String nombre = textField1.getText();
+            String correo = textField3.getText();
+            String habitacion = comboBox.getSelectedItem().toString();
+            String checkIn = fecha.getText();
+            String checkOut = fecha2.getText();
+
+            // Obtener el ID del TextField
+            int id = Integer.parseInt(textField2.getText());
+            
+            try {
+                archivo.write(id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut + "\r\n");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al tratar de guardar el archivo");
+            }
+            
+            try {
+                archivo.close();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al tratar de cerrar el archivo");
+            }
+        }
+    }
 
     public static void main(String[] args) {
         new Nuevo(null);

@@ -76,10 +76,10 @@ public class Consultar extends JFrame {
         mensajeLabel.setBounds(50, 320, 300, 30); // Ajustado el ancho y posición
         mensajeLabel.setForeground(Color.GRAY);
         add(mensajeLabel);
-
+        /*
         btnConsultar.addActionListener((ActionEvent e) -> {
             consultarCliente(idTextField.getText(), mensajeLabel);
-        });
+        });*/
 
         btnLimpiar.addActionListener((ActionEvent e) -> {
             idTextField.setText("");
@@ -90,7 +90,7 @@ public class Consultar extends JFrame {
             setVisible(false);
         });
     }
-
+/*
     // Método para consultar el cliente
     public void consultarCliente(String consultaStr, JLabel mensajeLabel) {
         int consulta = Integer.parseInt(consultaStr);
@@ -134,4 +134,5 @@ public class Consultar extends JFrame {
             return "Cliente no encontrado";
         }
     }
+*/
 }
