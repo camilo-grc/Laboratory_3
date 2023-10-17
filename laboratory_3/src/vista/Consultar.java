@@ -11,6 +11,8 @@ Version 1.0
 
 package vista;
 
+import modelo.Cliente;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,7 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
-import modelo.Cliente;
 
 public class Consultar extends JFrame {
 
