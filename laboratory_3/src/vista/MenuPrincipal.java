@@ -58,30 +58,23 @@ public class MenuPrincipal extends JFrame {
         add(jlTexto);
         
         btnReserva = new JButton("Nuevo");
-<<<<<<< HEAD
         btnReserva.setBounds(100, 180, 300, 50);
-=======
-        btnReserva.setBounds(100, 230, 300, 50);
->>>>>>> e87a26ed350c3810899199f8d3a3936eca8d44e3
+
         btnReserva.addActionListener(cmm);
         add(btnReserva);
         
         btnConsultar = new JButton("Consultar");
-<<<<<<< HEAD
         btnConsultar.setBounds(100,260,300,50);
-=======
-        btnConsultar.setBounds(100,310,300,50);
->>>>>>> e87a26ed350c3810899199f8d3a3936eca8d44e3
         btnConsultar.addActionListener(cmm);
         add(btnConsultar);
         
         btnActualizar = new JButton("Actualizar");
-        btnActualizar.setBounds(100,390,300,50);
+        btnActualizar.setBounds(100,340,300,50);
         btnActualizar.addActionListener(cmm);
         add(btnActualizar);
         
         btnAcerca = new JButton("Acerca de");
-        btnAcerca.setBounds(100, 470, 300, 50);
+        btnAcerca.setBounds(100, 420, 300, 50);
         btnAcerca.addActionListener(cmm);
         add(btnAcerca);
     }
