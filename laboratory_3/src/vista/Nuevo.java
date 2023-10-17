@@ -66,7 +66,7 @@ public class Nuevo extends JFrame {
     public void createGUI() {
         
         if (archivoCreado == false) {
-            Cliente.crearArchivoCSV();
+            //Cliente.crearArchivoCSV();
         }
         
         JLabel jl = new JLabel("Reservación");
