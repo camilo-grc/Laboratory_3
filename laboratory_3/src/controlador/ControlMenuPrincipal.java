@@ -18,11 +18,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 import vista.Acerca;
 import vista.Actualizar;
 import vista.Consultar;
 import vista.MenuPrincipal;
 import vista.Nuevo;
+import vista.Login;
 
 public class ControlMenuPrincipal implements ActionListener{
     

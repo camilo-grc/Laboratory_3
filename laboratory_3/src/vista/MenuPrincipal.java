@@ -11,6 +11,9 @@ Version 2.0
 
 package vista;
 
+import modelo.Cliente;
+import controlador.ControlMenuPrincipal;
+
 // import org.jfree.chart.ChartFactory;
 // import org.jfree.chart.ChartPanel;
 // import org.jfree.chart.JFreeChart;
@@ -19,8 +22,6 @@ package vista;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.util.ArrayList;
-import modelo.Cliente;
-import controlador.ControlMenuPrincipal;
 import java.awt.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,7 +29,7 @@ import javax.swing.JTextField;
 
 public class MenuPrincipal extends JFrame {
     
-    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnListados;
+    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnLogin, btnListados;
     public JLabel jlTexto;
     public ArrayList<Cliente> clients = new ArrayList<>();
     
@@ -54,28 +55,29 @@ public class MenuPrincipal extends JFrame {
         add(jlTexto);
         
         btnReserva = new JButton("Nuevo");
-        btnReserva.setBounds(100, 150, 300, 50);
+        btnReserva.setBounds(100, 230, 300, 50);
         btnReserva.addActionListener(cmm);
         add(btnReserva);
         
         btnConsultar = new JButton("Consultar");
-        btnConsultar.setBounds(100,230,300,50);
+        btnConsultar.setBounds(100,310,300,50);
         btnConsultar.addActionListener(cmm);
         add(btnConsultar);
         
         btnActualizar = new JButton("Actualizar");
-        btnActualizar.setBounds(100,310,300,50);
+        btnActualizar.setBounds(100,390,300,50);
         btnActualizar.addActionListener(cmm);
         add(btnActualizar);
         
         btnAcerca = new JButton("Acerca de");
-        btnAcerca.setBounds(100, 390, 300, 50);
+        btnAcerca.setBounds(100, 470, 300, 50);
         btnAcerca.addActionListener(cmm);
         add(btnAcerca);
     }
     
     public static void main(String[] args) {
-        MenuPrincipal obj = new MenuPrincipal();
+        Login login = new Login();
+        //MenuPrincipal obj = new MenuPrincipal();
     }
 }
 
