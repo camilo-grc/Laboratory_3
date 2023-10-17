@@ -16,6 +16,7 @@ The objetive of this Laboratory 3 is create an app, that allows:
 
 - **Show the programmers data:** Name, code and email.
 
+---
 
 ### Data:
 
@@ -28,5 +29,3 @@ The objetive of this Laboratory 3 is create an app, that allows:
 4. **Check-In:** Is the date of occupancy of the room. Is selected by the client.
 
 5. **Check-Out:** Is the date of desocupation of the room. Is selected by the client.
-
----
