@@ -136,6 +136,7 @@ public class Login extends JFrame{
         }else{
             if(login.equals("root") && passw.equals("123456")){
                 MenuPrincipal mm = new MenuPrincipal();
+                setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(this, 
                         "Ingreso incorrecto. Login y/o password incorrecto",
