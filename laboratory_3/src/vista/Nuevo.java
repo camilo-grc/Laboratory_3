@@ -14,6 +14,8 @@ package vista;
 import modelo.Cliente;
 import vista.MenuPrincipal;
 
+import java.io.File;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -35,7 +37,9 @@ import javax.swing.border.EtchedBorder;
 
 
 public class Nuevo extends JFrame {
-
+    
+    public static boolean archivoCreado = false;
+  
     MenuPrincipal mm;
     public JButton btnGuardarReserva, btnLimpiarReserva, btnVolver;
     public static ArrayList<ArrayList<Object>> clientes = new ArrayList<>();
@@ -60,6 +64,11 @@ public class Nuevo extends JFrame {
     }
 
     public void createGUI() {
+        
+        if (archivoCreado == false) {
+            Cliente.crearArchivoCSV();
+        }
+        
         JLabel jl = new JLabel("Reservación");
         ImageIcon icon = new ImageIcon(getClass().getResource("../imgs/user.png"));
         jl.setIcon(icon);
@@ -238,6 +247,8 @@ public class Nuevo extends JFrame {
 
         return null;
     }
+    
+    
 
     public static void main(String[] args) {
         new Nuevo(null);
