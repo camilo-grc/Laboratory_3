@@ -63,13 +63,6 @@ public class Nuevo extends JFrame {
 
     public void createGUI() {
         
-<<<<<<< HEAD
-=======
-        if (archivoCreado == false) {
-            //Cliente.crearArchivoCSV();
-        }
-        
->>>>>>> 67de60a216490639f031a5d0e4480dbe6d94528a
         JLabel jl = new JLabel("Reservación");
         ImageIcon icon = new ImageIcon(getClass().getResource("../imgs/user.png"));
         jl.setIcon(icon);

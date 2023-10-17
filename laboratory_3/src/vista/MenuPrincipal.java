@@ -59,20 +59,13 @@ public class MenuPrincipal extends JFrame {
         
         btnReserva = new JButton("Nuevo");
         btnReserva.setBounds(100, 180, 300, 50);
-<<<<<<< HEAD
         btnReserva.setBounds(100, 230, 300, 50);
-=======
-
->>>>>>> 67de60a216490639f031a5d0e4480dbe6d94528a
         btnReserva.addActionListener(cmm);
         add(btnReserva);
         
         btnConsultar = new JButton("Consultar");
         btnConsultar.setBounds(100,260,300,50);
-<<<<<<< HEAD
         btnConsultar.setBounds(100,310,300,50);
-=======
->>>>>>> 67de60a216490639f031a5d0e4480dbe6d94528a
         btnConsultar.addActionListener(cmm);
         add(btnConsultar);
         
