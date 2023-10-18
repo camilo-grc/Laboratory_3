@@ -11,11 +11,11 @@ public class ListadoGeneral extends JFrame {
         setTitle("Listado General de Clientes");
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
 
-        // columnas al modelo
+        // Columnas al modelo
         model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Habitación");
@@ -37,6 +37,9 @@ public class ListadoGeneral extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Deshabilitar la edición en el JTable
+        table.setDefaultEditor(Object.class, null);
 
         // Agregar la tabla a un JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
