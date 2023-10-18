@@ -26,8 +26,8 @@ public class Listados extends JFrame {
 
         btnListadoGeneral.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ListadoGeneralFrame generalFrame = new ListadoGeneralFrame();
-                //generalFrame.setVisible(true);
+                ListadoGeneral generalFrame = new ListadoGeneral();
+                generalFrame.setVisible(true);
             }
         });
 
