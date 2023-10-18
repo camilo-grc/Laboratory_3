@@ -11,6 +11,7 @@ Version 1.0
 
 package vista;
 
+import controlador.herramientas;
 import modelo.Cliente;
 import vista.MenuPrincipal;
 
@@ -46,7 +47,9 @@ public class Nuevo extends JFrame {
     public static String[] opciones = {"Individual", "Doble", "Matrimonial", "Suite"};
     JComboBox<String> comboBox;
 
-    private static int lastGeneratedId = 0; // Variable para almacenar el último ID generado
+    herramientas obj = new herramientas();
+    
+    int lastGeneratedId = obj.contarReservaciones(); // Variable para almacenar el último ID generado
 
     public Nuevo(MenuPrincipal mm) {
         super("Nueva Reservación");
@@ -204,7 +207,7 @@ public class Nuevo extends JFrame {
         });
     }
 
-    private static int generateNextId() {
+    public int generateNextId() {
         return ++lastGeneratedId; // Incrementar y devolver el ID siguiente
     }
 
