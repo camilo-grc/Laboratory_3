@@ -9,7 +9,6 @@ public class herramientas {
     
     public int contarReservaciones() {
         FileReader file = null;
-        boolean error = false;
         int numero = 0;
         
         try {
@@ -85,5 +84,4 @@ public class herramientas {
         return "-";
         
     }
-    
 }

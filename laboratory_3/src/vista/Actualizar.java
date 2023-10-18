@@ -11,11 +11,18 @@ Version 1.0
 
 package vista;
 
+import controlador.herramientas;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -41,11 +48,11 @@ public class Actualizar extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
 
-        //createGUI();
+        createGUI();
 
         setVisible(true);
     }
-/*
+    
     public void createGUI() {
         JLabel titleLabel = new JLabel("Modificar Cliente");
         titleLabel.setBounds(0, 0, 400, 50); // Ajustado el ancho y posición
@@ -129,20 +136,22 @@ public class Actualizar extends JFrame {
 
         // Acciones de los botones
         btnBuscar.addActionListener((ActionEvent e) -> {
-            buscarCliente();
-
-            if (textFieldNombre.isEditable()) {
-                btnGuardarModificacion.setEnabled(true);
-                textFieldEmail.setEditable(true);
-                comboBoxHabitacion.setEnabled(true);
-                fechaCheckIn.setEditable(true);
-                fechaCheckOut.setEditable(true);
-            }
+            int _id = Integer.parseInt(textFieldId.getText());
+            actualizarReservacion(_id);
+            
+            textFieldId.setEditable(false);
+            textFieldNombre.setEditable(true);
+            btnGuardarModificacion.setEnabled(true);
+            textFieldEmail.setEditable(true);
+            comboBoxHabitacion.setEnabled(true);
+            fechaCheckIn.setEditable(true);
+            fechaCheckOut.setEditable(true);
+            
         });
 
         btnGuardarModificacion.addActionListener((ActionEvent e) -> {
-            modificarCliente();
-
+            int _id = Integer.parseInt(textFieldId.getText());
+            actualizar(_id);
             mensajeLabel.setText("Modificación exitosa.");
         });
 
@@ -150,65 +159,62 @@ public class Actualizar extends JFrame {
             setVisible(false);
         });
     }
+    
+    public void actualizarReservacion(int idBuscar) {
+        herramientas obj = new herramientas();
 
-    public void buscarCliente() {
-        int id = Integer.parseInt(textFieldId.getText());
-        boolean clienteEncontrado = false;
+        String reservacion = obj.buscarReservacion(idBuscar);
 
-        for (int i = 0; i < Nuevo.clientes.size(); i++) {
-            int clienteId = (int) Nuevo.clientes.get(i).get(0);
-
-            if (clienteId == id) {
-                // Mostrar los datos del cliente encontrado
-                textFieldNombre.setText((String) Nuevo.clientes.get(i).get(1));
-                textFieldEmail.setText((String) Nuevo.clientes.get(i).get(2));
-                comboBoxHabitacion.setSelectedItem((String) Nuevo.clientes.get(i).get(3));
-                fechaCheckIn.setText((String) Nuevo.clientes.get(i).get(4));
-                fechaCheckOut.setText((String) Nuevo.clientes.get(i).get(5));
-                clienteEncontrado = true;
-                // Habilitar edición de campos
-                textFieldNombre.setEditable(true);
-                textFieldEmail.setEditable(true);
-                comboBoxHabitacion.setEnabled(true);
-                fechaCheckIn.setEditable(true);
-                fechaCheckOut.setEditable(true);
-                break;
-            }
+        if (reservacion == "-") {
+            JOptionPane.showMessageDialog(null, "Reservacion no encontrada");
         }
+    }
+    
+    public void actualizar(int idBuscar) {
+        try {
+                BufferedReader lectura = new BufferedReader(new FileReader("datos.csv"));
+                ArrayList<String> reservaciones = new ArrayList<>();
+                String fila;
 
-        if (!clienteEncontrado) {
-            JOptionPane.showMessageDialog(null, "Cliente no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-            // Restablecer los campos
-            textFieldNombre.setText("");
-            textFieldEmail.setText("");
-            comboBoxHabitacion.setSelectedIndex(0);
-            fechaCheckIn.setText("");
-            fechaCheckOut.setText("");
-            // Deshabilitar edición de campos
-            textFieldNombre.setEditable(false);
-            textFieldEmail.setEditable(false);
-            comboBoxHabitacion.setEnabled(false);
-            fechaCheckIn.setEditable(false);
-            fechaCheckOut.setEditable(false);
+                // Leer todas las líneas del archivo y guardarlas en la lista de reservaciones
+                while ((fila = lectura.readLine()) != null) {
+                    reservaciones.add(fila);
+                }
+
+                lectura.close();
+
+                int lineaAModificar = idBuscar - 1; // Resta 1 al índice
+
+                if (lineaAModificar >= 0 && lineaAModificar < reservaciones.size()) {
+                    String nombre = textFieldNombre.getText();
+                    String correo = textFieldEmail.getText();
+                    String habitacion = comboBoxHabitacion.getSelectedItem().toString();
+                    String checkIn = fechaCheckIn.getText();
+                    String checkOut = fechaCheckOut.getText();
+                    String id = idBuscar + "";
+
+                    System.out.println(id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut);
+                    
+                    String nuevaLinea = id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut;
+
+                    // Reemplazar la línea modificada en la lista de reservaciones
+                    reservaciones.set(lineaAModificar, nuevaLinea);
+
+                    // Sobrescribir el archivo con las reservaciones actualizadas
+                    BufferedWriter escritor = new BufferedWriter(new FileWriter("datos.csv"));
+                    for (String linea : reservaciones) {
+                        escritor.write(linea);
+                        escritor.newLine();
+                    }
+                    escritor.close();
+
+                    JOptionPane.showMessageDialog(null, "Modificación exitosa.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Reservación no encontrada");
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al intentar leer o escribir en el archivo");
+            }
         }
     }
 
-    public void modificarCliente() {
-        int id = Integer.parseInt(textFieldId.getText());
-
-        for (int i = 0; i < Nuevo.clientes.size(); i++) {
-            int clienteId = (int) Nuevo.clientes.get(i).get(0);
-
-            if (clienteId == id) {
-                // Actualizar los datos del cliente con el ID correspondiente
-                Nuevo.clientes.get(i).set(1, textFieldNombre.getText());
-                Nuevo.clientes.get(i).set(2, textFieldEmail.getText());
-                Nuevo.clientes.get(i).set(3, comboBoxHabitacion.getSelectedItem().toString());
-                Nuevo.clientes.get(i).set(4, fechaCheckIn.getText());
-                Nuevo.clientes.get(i).set(5, fechaCheckOut.getText());
-                break;
-            }
-        }
-    }
-*/
-}
