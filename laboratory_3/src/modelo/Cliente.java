@@ -11,15 +11,19 @@ Version 1.0
 
 package modelo;
 
+import controlador.herramientas;
+import vista.Nuevo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import vista.Nuevo;
+
 
 public class Cliente {
-    static int proximoId = 1;
+    herramientas obj = new herramientas();
+    int proximoId = obj.contarReservaciones();
     int id;
     String nombre, checkin, checkout, correo, habitacion;
     boolean actividad;

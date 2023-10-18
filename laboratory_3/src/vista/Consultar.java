@@ -11,14 +11,19 @@ Version 1.0
 
 package vista;
 
+import controlador.herramientas;
 import modelo.Cliente;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
@@ -26,7 +31,6 @@ public class Consultar extends JFrame {
 
     MenuPrincipal menuPrincipal;
     public JButton btnConsultar, btnLimpiar, btnVolver;
-    int indice = -1;
 
     public Consultar(MenuPrincipal menuPrincipal) {
         super("Consultar Cliente");
@@ -57,6 +61,7 @@ public class Consultar extends JFrame {
         idTextField.setBounds(140, 100, 200, 30);
         add(idLabel);
         add(idTextField);
+        
 
         btnConsultar = new JButton("Consultar");
         btnConsultar.setBounds(120, 180, 160, 30); // Ajustado el ancho y posición
@@ -70,16 +75,22 @@ public class Consultar extends JFrame {
         btnVolver.setBounds(220, 250, 100, 30); // Ajustado el ancho y posición
         add(btnVolver);
 
-        Cliente cliente = new Cliente();
 
         JLabel mensajeLabel = new JLabel("");
         mensajeLabel.setBounds(50, 320, 300, 30); // Ajustado el ancho y posición
         mensajeLabel.setForeground(Color.GRAY);
         add(mensajeLabel);
-        /*
+        
+        
         btnConsultar.addActionListener((ActionEvent e) -> {
-            consultarCliente(idTextField.getText(), mensajeLabel);
-        });*/
+        String _id = idTextField.getText(); // Obtener el ID cuando se presiona el botón
+        if (!_id.isEmpty()) {
+            int idBuscar = Integer.parseInt(_id); // Convertir a entero
+            mostrarReservacion(idBuscar);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID válido.");
+        }
+    });
 
         btnLimpiar.addActionListener((ActionEvent e) -> {
             idTextField.setText("");
@@ -90,49 +101,30 @@ public class Consultar extends JFrame {
             setVisible(false);
         });
     }
-/*
-    // Método para consultar el cliente
-    public void consultarCliente(String consultaStr, JLabel mensajeLabel) {
-        int consulta = Integer.parseInt(consultaStr);
-        indice = -1;
 
-        for (int i = 0; i < Nuevo.clientes.size(); i++) {
-            int id = (int) Nuevo.clientes.get(i).get(0);
-            if (id == consulta) {
-                indice = i;
-                break;
+    
+        
+    public void mostrarReservacion(int idBuscar) {
+        herramientas obj = new herramientas();
+
+        String reservacion = obj.buscarReservacion(idBuscar);
+        
+        if (reservacion == "-") {
+            JOptionPane.showMessageDialog(null, "Reservacion no encontrada");
+        } else {
+            String campos[] = new String[6];
+            for (int i = 0; i < 6; i++) {
+                campos = reservacion.split(";");
             }
-        }
-
-        if (indice != -1) {
-            JFrame mostrarVentana = new JFrame();
-            JLabel datosLabel = new JLabel(getDatosCliente(indice));
-            mostrarVentana.add(datosLabel);
-            mostrarVentana.setSize(400, 300);
-            mostrarVentana.setLocationRelativeTo(menuPrincipal);
-            mostrarVentana.setVisible(true);
-        } else {
-            mensajeLabel.setText("Cliente no encontrado");
+            
+            int id = Integer.parseInt(campos[0]);
+            String nombre = campos[1];
+            String habitacion = campos[2];
+            String correo = campos[3];
+            String check_in = campos[4];
+            String check_out = campos[5];
+            
+            JOptionPane.showMessageDialog(null, "Nombre = " + nombre + "\n" + "ID = " + id + "\n" + "Correo = " + correo + "\n" + "Habitacion = " + habitacion + "\n" + "Check-In = " + check_in + "\n" + "Check-Out = " + check_out);
         }
     }
-
-    // Método para obtener los datos del cliente
-    public String getDatosCliente(int indice) {
-        if (indice >= 0 && indice < Nuevo.clientes.size()) {
-            int id = (int) Nuevo.clientes.get(indice).get(0);
-            String nombre = (String) Nuevo.clientes.get(indice).get(1);
-            String correo = (String) Nuevo.clientes.get(indice).get(2);
-            String habitacion = (String) Nuevo.clientes.get(indice).get(3);
-            String check_in = (String) Nuevo.clientes.get(indice).get(4);
-            String check_out = (String) Nuevo.clientes.get(indice).get(5);
-
-            String datosCliente = "<html><center>" + "Información" + "<br>" + "ID: " + id + "<br>" + "Nombre: " + nombre + "<br>" + "Correo: " + correo + "<br>"
-                    + "Habitación: " + habitacion + "<br>" + "Check-in: " + check_in + "<br>" + "Check-out: " + check_out + "</center></html>";
-
-            return datosCliente;
-        } else {
-            return "Cliente no encontrado";
-        }
-    }
-*/
 }
