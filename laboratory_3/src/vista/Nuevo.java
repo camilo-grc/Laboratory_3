@@ -6,7 +6,7 @@ Oscar Andres Hernandez Pineda - 2264488
 Alejandro Cuenca - 22644755
 
 Ult. fecha modificacion: 3/10/2023
-Version 1.0
+Version 2.0
 */
 
 package vista;
