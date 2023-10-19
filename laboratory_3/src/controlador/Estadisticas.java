@@ -14,7 +14,9 @@ package controlador;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.GraficoBarras;
 import vista.GraficoLineas;
+import vista.GraficoTorta;
 import vista.MenuPrincipal;
 
 public class Estadisticas extends JFrame {
@@ -36,6 +38,8 @@ public class Estadisticas extends JFrame {
 
         btnGraficoBarras = new JButton("Grafico Barras");
         btnGraficoBarras.setBounds(100, 180, 200, 40);
+        
+// -----------------------------------------------------------------------------
 
         btnGraficoLineas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -46,13 +50,14 @@ public class Estadisticas extends JFrame {
 
         btnGraficoTorta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //
+                GraficoTorta torta = new GraficoTorta();
+                torta.setVisible(true);
             }
         });
 
         btnGraficoBarras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //
+                GraficoBarras barras = new GraficoBarras();
             }
         });
 

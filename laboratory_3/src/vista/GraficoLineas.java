@@ -29,16 +29,9 @@ public class GraficoLineas extends ApplicationFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         setContentPane(chartPanel);
         setSize(900, 600);
-
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                setVisible(false); // Ocultar la ventana
-            }
-        });
     }
 
-    private DefaultCategoryDataset createDataset() {
+    public DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -76,7 +69,7 @@ public class GraficoLineas extends ApplicationFrame {
         return dataset;
     }
 
-    private JFreeChart createChart(DefaultCategoryDataset dataset) {
+    public JFreeChart createChart(DefaultCategoryDataset dataset) {
         JFreeChart chart = ChartFactory.createLineChart(
                 "Cantidad de Tipos de Habitación por Mes",
                 "Mes",
