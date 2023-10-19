@@ -32,14 +32,14 @@ import javax.swing.JTextField;
 
 public class MenuPrincipal extends JFrame {
     
-    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnLogin, btnListados;
+    public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnLogin, btnListados, btnEstadisticas;
     public JLabel jlTexto;
     public ArrayList<Cliente> clients = new ArrayList<>();
     
     public MenuPrincipal() {
         super("Forest Suites");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 620);
+        setSize(500, 680);
         setLocationRelativeTo(null);
         setLayout(null);
         createGUI();
@@ -58,27 +58,32 @@ public class MenuPrincipal extends JFrame {
         add(jlTexto);
         
         btnReserva = new JButton("Nuevo");
-        btnReserva.setBounds(100, 150, 300, 50);
+        btnReserva.setBounds(100, 130, 300, 50);
         btnReserva.addActionListener(cmm);
         add(btnReserva);
         
         btnConsultar = new JButton("Consultar");
-        btnConsultar.setBounds(100,230,300,50);
+        btnConsultar.setBounds(100,210,300,50);
         btnConsultar.addActionListener(cmm);
         add(btnConsultar);
         
         btnActualizar = new JButton("Actualizar");
-        btnActualizar.setBounds(100,310,300,50);
+        btnActualizar.setBounds(100,290,300,50);
         btnActualizar.addActionListener(cmm);
         add(btnActualizar);
         
         btnListados = new JButton("Listados");
-        btnListados.setBounds(100,390,300,50);
+        btnListados.setBounds(100,370,300,50);
         btnListados.addActionListener(cmm);
         add(btnListados);
         
+        btnEstadisticas = new JButton("Estadisticas");
+        btnEstadisticas.setBounds(100,450,300,50);
+        btnEstadisticas.addActionListener(cmm);
+        add(btnEstadisticas);
+        
         btnAcerca = new JButton("Acerca de");
-        btnAcerca.setBounds(100, 470, 300, 50);
+        btnAcerca.setBounds(100, 530, 300, 50);
         btnAcerca.addActionListener(cmm);
         add(btnAcerca);
     }

@@ -25,7 +25,6 @@ import vista.Consultar;
 import vista.MenuPrincipal;
 import vista.Nuevo;
 import vista.Login;
-import vista.Listados;
 
 public class ControlMenuPrincipal implements ActionListener{
     
@@ -51,6 +50,9 @@ public class ControlMenuPrincipal implements ActionListener{
         }
         if (e.getSource().equals(mm.btnListados)) {
             Listados ls = new Listados(mm);
+        }
+        if (e.getSource().equals(mm.btnEstadisticas)) {
+            Estadisticas es = new Estadisticas(mm);
         }
     }
 }

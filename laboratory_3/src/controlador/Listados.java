@@ -9,11 +9,15 @@ Ult. fecha modificacion: 19/10/2023
 Version 2.0
 */
 
-package vista;
+package controlador;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.ListadoFecha;
+import vista.ListadoGeneral;
+import vista.ListadoHabitacion;
+import vista.MenuPrincipal;
 
 public class Listados extends JFrame {
     
@@ -34,6 +38,8 @@ public class Listados extends JFrame {
 
         btnListadoFecha = new JButton("Listado por fecha");
         btnListadoFecha.setBounds(100, 180, 200, 40);
+        
+//------------------------------------------------------------------------------
 
         btnListadoGeneral.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
