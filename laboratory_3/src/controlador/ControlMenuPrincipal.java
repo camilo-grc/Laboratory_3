@@ -5,8 +5,8 @@ Oscar Andres Hernandez Pineda - 2264488
 Camilo Andres Garcia - 2264484
 Alejandro Cuenca - 22644755
 
-Ult. fecha modificacion: 3/10/2023
-Version 1.0
+Ult. fecha modificacion: 19/10/2023
+Version 2.0
 */
 
 package controlador;
