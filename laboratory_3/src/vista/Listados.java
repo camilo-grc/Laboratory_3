@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class Listados extends JFrame {
     
-    public JButton btnListadoGeneral, btnListadoPorCampos1, btnListadoPorCampos2;
+    public JButton btnListadoGeneral, btnListadoHabitacion, btnListadoFecha;
     
     public Listados(MenuPrincipal mm) {
         setTitle("Menú de Listados");
@@ -18,11 +18,11 @@ public class Listados extends JFrame {
         btnListadoGeneral = new JButton("Listado General");
         btnListadoGeneral.setBounds(100, 60, 200, 40);
 
-        btnListadoPorCampos1 = new JButton("Listado x");
-        btnListadoPorCampos1.setBounds(100, 120, 200, 40);
+        btnListadoHabitacion = new JButton("Listado por Habitacion");
+        btnListadoHabitacion.setBounds(100, 120, 200, 40);
 
-        btnListadoPorCampos2 = new JButton("Listado y");
-        btnListadoPorCampos2.setBounds(100, 180, 200, 40);
+        btnListadoFecha = new JButton("Listado por fecha");
+        btnListadoFecha.setBounds(100, 180, 200, 40);
 
         btnListadoGeneral.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -31,23 +31,23 @@ public class Listados extends JFrame {
             }
         });
 
-        btnListadoPorCampos1.addActionListener(new ActionListener() {
+        btnListadoHabitacion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ListadoPorCampos1Frame campos1Frame = new ListadoPorCampos1Frame();
-                //campos1Frame.setVisible(true);
+                ListadoHabitacion habitacion = new ListadoHabitacion();
+                habitacion.setVisible(true);
             }
         });
 
-        btnListadoPorCampos2.addActionListener(new ActionListener() {
+        btnListadoFecha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ListadoPorCampos2Frame campos2Frame = new ListadoPorCampos2Frame();
-                //campos2Frame.setVisible(true);
+                ListadoFecha fecha = new ListadoFecha();
+                fecha.setVisible(true);
             }
         });
 
         add(btnListadoGeneral);
-        add(btnListadoPorCampos1);
-        add(btnListadoPorCampos2);
+        add(btnListadoHabitacion);
+        add(btnListadoFecha);
     }
 }
 
