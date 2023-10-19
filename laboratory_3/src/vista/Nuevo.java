@@ -11,6 +11,7 @@ Version 1.0
 
 package vista;
 
+import vista.LimitadorCaracteres;
 import controlador.herramientas;
 import modelo.Cliente;
 import vista.MenuPrincipal;
@@ -85,6 +86,7 @@ public class Nuevo extends JFrame {
         JLabel etiqueta = new JLabel("Nombre:");
         etiqueta.setBounds(30, 60, 100, 30);
         textField1 = new JTextField();
+        textField1.setDocument(new LimitadorCaracteres(textField1, 30, 1));
         textField1.setBounds(140, 60, 200, 30);
 
         JLabel etiqueta1 = new JLabel("ID:");
@@ -96,6 +98,7 @@ public class Nuevo extends JFrame {
         JLabel etiqueta2 = new JLabel("Email:");
         etiqueta2.setBounds(30, 140, 100, 30);
         textField3 = new JTextField();
+        textField3.setDocument(new LimitadorCaracteres(textField3, 40, 5));
         textField3.setBounds(140, 140, 200, 30);
 
         JLabel etiqueta3 = new JLabel("Habitación:");

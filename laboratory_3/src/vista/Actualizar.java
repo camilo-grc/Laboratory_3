@@ -72,12 +72,14 @@ public class Actualizar extends JFrame {
         JLabel etiquetaNombre = new JLabel("Nombre");
         etiquetaNombre.setBounds(50, 120, 100, 30); // Ajustado el ancho y posición
         textFieldNombre = new JTextField();
+        textFieldNombre.setDocument(new LimitadorCaracteres(textFieldNombre, 20, 1));
         textFieldNombre.setBounds(160, 120, 150, 30); // Ajustado el ancho y posición
         textFieldNombre.setEditable(false); // Deshabilitar la edición del nombre
 
         JLabel etiquetaEmail = new JLabel("Email");
         etiquetaEmail.setBounds(50, 170, 100, 30); // Ajustado el ancho y posición
         textFieldEmail = new JTextField();
+        textFieldEmail.setDocument(new LimitadorCaracteres(textFieldEmail, 40, 5));
         textFieldEmail.setBounds(160, 170, 150, 30); // Ajustado el ancho y posición
         textFieldEmail.setEditable(false); // Deshabilitar la edición del correo
 
@@ -137,16 +139,31 @@ public class Actualizar extends JFrame {
         // Acciones de los botones
         btnBuscar.addActionListener((ActionEvent e) -> {
             int _id = Integer.parseInt(textFieldId.getText());
-            actualizarReservacion(_id);
+            boolean encontrado = actualizarReservacion(_id);
             
-            textFieldId.setEditable(false);
-            textFieldNombre.setEditable(true);
-            btnGuardarModificacion.setEnabled(true);
-            textFieldEmail.setEditable(true);
-            comboBoxHabitacion.setEnabled(true);
-            fechaCheckIn.setEditable(true);
-            fechaCheckOut.setEditable(true);
+            if (!encontrado) {
             
+                JOptionPane.showMessageDialog(null, "Reservacion no encontrada");
+                textFieldNombre.setEditable(false);
+                btnGuardarModificacion.setEnabled(false);
+                textFieldEmail.setEditable(false);
+                comboBoxHabitacion.setEnabled(false);
+                fechaCheckIn.setEditable(false);
+                fechaCheckOut.setEditable(false);
+            
+            } else {
+            
+                actualizarReservacion(_id);
+            
+                textFieldId.setEditable(false);
+                textFieldNombre.setEditable(true);
+                btnGuardarModificacion.setEnabled(true);
+                textFieldEmail.setEditable(true);
+                comboBoxHabitacion.setEnabled(true);
+                fechaCheckIn.setEditable(true);
+                fechaCheckOut.setEditable(true);
+            
+            }
         });
 
         btnGuardarModificacion.addActionListener((ActionEvent e) -> {
@@ -160,13 +177,15 @@ public class Actualizar extends JFrame {
         });
     }
     
-    public void actualizarReservacion(int idBuscar) {
+    public boolean actualizarReservacion(int idBuscar) {
         herramientas obj = new herramientas();
 
         String reservacion = obj.buscarReservacion(idBuscar);
 
         if (reservacion == "-") {
-            JOptionPane.showMessageDialog(null, "Reservacion no encontrada");
+            return false;
+        } else {
+            return true;
         }
     }
     
@@ -192,8 +211,6 @@ public class Actualizar extends JFrame {
                     String checkIn = fechaCheckIn.getText();
                     String checkOut = fechaCheckOut.getText();
                     String id = idBuscar + "";
-
-                    System.out.println(id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut);
                     
                     String nuevaLinea = id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut;
 
