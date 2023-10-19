@@ -85,7 +85,7 @@ public class Actualizar extends JFrame {
 
         JLabel etiquetaHabitacion = new JLabel("Habitación");
         etiquetaHabitacion.setBounds(50, 220, 100, 30); // Ajustado el ancho y posición
-        comboBoxHabitacion = new JComboBox<>(Nuevo.opciones);
+        comboBoxHabitacion = new JComboBox<>(Nuevo.opcionesHabitacion);
         comboBoxHabitacion.setBounds(160, 220, 150, 30); // Ajustado el ancho y posición
         comboBoxHabitacion.setEnabled(false); // Deshabilitar la edición de la habitación
 
