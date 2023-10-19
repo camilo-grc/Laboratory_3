@@ -43,7 +43,7 @@ public class Estadisticas extends JFrame {
 
         btnGraficoLineas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GraficoLineas lineas = new GraficoLineas("Grafico Lineas");
+                GraficoLineas lineas = new GraficoLineas();
                 lineas.setVisible(true);
             }
         });

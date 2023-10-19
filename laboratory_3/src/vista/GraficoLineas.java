@@ -8,27 +8,41 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GraficoLineas extends ApplicationFrame {
+public class GraficoLineas extends JFrame {
 
-    public GraficoLineas(String title) {
-        super(title);
+    public GraficoLineas() {
+        super("Gráfico de Líneas");
         JFreeChart chart = createChart(createDataset());
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
-        setContentPane(chartPanel);
-        setSize(900, 600);
+        add(chartPanel);
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Configura el cierre solo para la ventana actual
+
+        pack();
+        setLocationRelativeTo(null);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                // Esto se ejecuta cuando se cierra la ventana
+                super.windowClosed(e);
+                System.out.println("Ventana cerrada.");
+            }
+        });
     }
 
     public DefaultCategoryDataset createDataset() {
@@ -59,10 +73,9 @@ public class GraficoLineas extends ApplicationFrame {
         }
 
         for (Map.Entry<String, Map<String, Integer>> entry : data.entrySet()) {
-            String roomType = entry.getKey();
             Map<String, Integer> roomTypeData = entry.getValue();
             for (Map.Entry<String, Integer> monthData : roomTypeData.entrySet()) {
-                dataset.addValue(monthData.getValue(), roomType, monthData.getKey());
+                dataset.addValue(monthData.getValue(), entry.getKey(), monthData.getKey());
             }
         }
 
@@ -71,7 +84,7 @@ public class GraficoLineas extends ApplicationFrame {
 
     public JFreeChart createChart(DefaultCategoryDataset dataset) {
         JFreeChart chart = ChartFactory.createLineChart(
-                "Cantidad de Tipos de Habitación por Mes",
+                "Reservas de Habitaciones por Mes",
                 "Mes",
                 "Cantidad",
                 dataset,
@@ -91,9 +104,9 @@ public class GraficoLineas extends ApplicationFrame {
     }
 
     public static void main(String[] args) {
-        GraficoLineas chart = new GraficoLineas("Gráfico de Tipos de Habitación por Mes");
-        chart.pack();
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            GraficoLineas chart = new GraficoLineas();
+            chart.setVisible(true);
+        });
     }
 }
