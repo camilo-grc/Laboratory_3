@@ -11,6 +11,7 @@ Version 2.0
 
 package vista;
 
+import vista.LimitadorCaracteres;
 import controlador.herramientas;
 import modelo.Cliente;
 import vista.MenuPrincipal;
@@ -43,13 +44,13 @@ public class Nuevo extends JFrame {
     MenuPrincipal mm;
     public JButton btnGuardarReserva, btnLimpiarReserva, btnVolver;
 
-    JTextField textField1, textField2, textField3, fecha, fecha2;
-    public static String[] opciones = {"Individual", "Doble", "Matrimonial", "Suite"};
-    JComboBox<String> comboBox;
+    JTextField textFieldNombre, textFieldId, textFieldEmail, textFieldCheckin, textFieldCheckout;
+    public static String[] opcionesHabitacion = {"Individual", "Doble", "Matrimonial", "Suite"};
+    JComboBox<String> comboBoxHabitacion;
 
-    herramientas obj = new herramientas();
+    herramientas objHerramienta = new herramientas();
     
-    int lastGeneratedId = obj.contarReservaciones(); // Variable para almacenar el último ID generado
+    int lastGeneratedId = objHerramienta.contarReservaciones(); // Variable para almacenar el último ID generado
 
     public Nuevo(MenuPrincipal mm) {
         super("Nueva Reservación");
@@ -82,45 +83,47 @@ public class Nuevo extends JFrame {
         
         // Labels y TextFields
         
-        JLabel etiqueta = new JLabel("Nombre:");
-        etiqueta.setBounds(30, 60, 100, 30);
-        textField1 = new JTextField();
-        textField1.setBounds(140, 60, 200, 30);
+        JLabel labelNombre = new JLabel("Nombre:");
+        labelNombre.setBounds(30, 60, 100, 30);
+        textFieldNombre = new JTextField();
+        textFieldNombre.setDocument(new LimitadorCaracteres(textFieldNombre, 30, 1));
+        textFieldNombre.setBounds(140, 60, 200, 30);
 
-        JLabel etiqueta1 = new JLabel("ID:");
-        etiqueta1.setBounds(30, 100, 100, 30);
-        textField2 = new JTextField();
-        textField2.setBounds(140, 100, 100, 30);
-        textField2.setEditable(false); // Deshabilitar la edición del ID
+        JLabel labelId = new JLabel("ID:");
+        labelId.setBounds(30, 100, 100, 30);
+        textFieldId = new JTextField();
+        textFieldId.setBounds(140, 100, 100, 30);
+        textFieldId.setEditable(false); // Deshabilitar la edición del ID
 
-        JLabel etiqueta2 = new JLabel("Email:");
-        etiqueta2.setBounds(30, 140, 100, 30);
-        textField3 = new JTextField();
-        textField3.setBounds(140, 140, 200, 30);
+        JLabel labelEmail = new JLabel("Email:");
+        labelEmail.setBounds(30, 140, 100, 30);
+        textFieldEmail = new JTextField();
+        textFieldEmail.setDocument(new LimitadorCaracteres(textFieldEmail, 40, 5));
+        textFieldEmail.setBounds(140, 140, 200, 30);
 
-        JLabel etiqueta3 = new JLabel("Habitación:");
-        etiqueta3.setBounds(30, 180, 100, 30);
-        comboBox = new JComboBox<>(opciones);
-        comboBox.setBounds(140, 180, 200, 30);
+        JLabel labelHabitacion = new JLabel("Habitación:");
+        labelHabitacion.setBounds(30, 180, 100, 30);
+        comboBoxHabitacion = new JComboBox<>(opcionesHabitacion);
+        comboBoxHabitacion.setBounds(140, 180, 200, 30);
 
         // Botones y etiquetas adicionales
-        JLabel etiqueta4 = new JLabel("Check-in:");
-        etiqueta4.setBounds(30, 220, 100, 30);
+        JLabel labelCheckin = new JLabel("Check-in:");
+        labelCheckin.setBounds(30, 220, 100, 30);
 
-        JLabel etiqueta5 = new JLabel("Check-out:");
-        etiqueta5.setBounds(30, 260, 100, 30);
+        JLabel labelCheckout = new JLabel("Check-out:");
+        labelCheckout.setBounds(30, 260, 100, 30);
 
         JButton selectButton = new JButton("Fecha");
         selectButton.setBounds(140, 220, 100, 30);
-        fecha = new JTextField();
-        fecha.setBounds(250, 220, 90, 30);
-        fecha.setEditable(false); // Deshabilitar la edición de la fecha
+        textFieldCheckin = new JTextField();
+        textFieldCheckin.setBounds(250, 220, 90, 30);
+        textFieldCheckin.setEditable(false); // Deshabilitar la edición de la fecha
 
         JButton selectButton2 = new JButton("Fecha");
         selectButton2.setBounds(140, 260, 100, 30);
-        fecha2 = new JTextField();
-        fecha2.setBounds(250, 260, 90, 30);
-        fecha2.setEditable(false); // Deshabilitar la edición de la fecha
+        textFieldCheckout = new JTextField();
+        textFieldCheckout.setBounds(250, 260, 90, 30);
+        textFieldCheckout.setEditable(false); // Deshabilitar la edición de la fecha
 
         // Botones principales
         btnGuardarReserva = new JButton("Guardar");
@@ -133,40 +136,40 @@ public class Nuevo extends JFrame {
         btnVolver.setBounds(30, 320, 90, 30);
 
         // Mensaje
-        JLabel mensajeLabel = new JLabel("");
-        mensajeLabel.setBounds(20, 360, 300, 30);
-        mensajeLabel.setForeground(Color.GRAY);
+        JLabel labelMensaje = new JLabel("");
+        labelMensaje.setBounds(20, 360, 300, 30);
+        labelMensaje.setForeground(Color.GRAY);
 
         // Agregar componentes al frame
-        add(etiqueta);
-        add(textField1);
-        add(etiqueta1);
-        add(textField2);
-        add(etiqueta2);
-        add(textField3);
-        add(etiqueta3);
-        add(comboBox);
-        add(etiqueta4);
+        add(labelNombre);
+        add(textFieldNombre);
+        add(labelId);
+        add(textFieldId);
+        add(labelEmail);
+        add(textFieldEmail);
+        add(labelHabitacion);
+        add(comboBoxHabitacion);
+        add(labelCheckin);
         add(selectButton);
-        add(fecha);
-        add(etiqueta5);
+        add(textFieldCheckin);
+        add(labelCheckout);
         add(selectButton2);
-        add(fecha2);
+        add(textFieldCheckout);
         add(btnGuardarReserva);
         add(btnLimpiarReserva);
         add(btnVolver);
-        add(mensajeLabel);
+        add(labelMensaje);
 
         // Generar el ID automáticamente al abrir la ventana
         int generatedId = generateNextId();
-        textField2.setText(String.valueOf(generatedId));
+        textFieldId.setText(String.valueOf(generatedId));
 
         // Acciones de los botones
         selectButton.addActionListener((ActionEvent e) -> {
             Date selectedDate = showDatePicker(mm);
             if (selectedDate != null) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                fecha.setText(dateFormat.format(selectedDate));
+                textFieldCheckin.setText(dateFormat.format(selectedDate));
             }
         });
 
@@ -174,7 +177,7 @@ public class Nuevo extends JFrame {
             Date selectedDate = showDatePicker(mm);
             if (selectedDate != null) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                fecha2.setText(dateFormat.format(selectedDate));
+                textFieldCheckout.setText(dateFormat.format(selectedDate));
             }
         });
 
@@ -183,23 +186,23 @@ public class Nuevo extends JFrame {
 
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea hacer otro registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
-                textField1.setText("");
-                textField2.setText(String.valueOf(generateNextId())); // Generar el siguiente ID
-                textField3.setText("");
-                fecha.setText("");
-                fecha2.setText("");
+                textFieldNombre.setText("");
+                textFieldId.setText(String.valueOf(generateNextId())); // Generar el siguiente ID
+                textFieldEmail.setText("");
+                textFieldCheckin.setText("");
+                textFieldCheckout.setText("");
             } else {
                 setVisible(false);
             }
 
-            mensajeLabel.setText("Guardado exitosamente.");
+            labelMensaje.setText("Guardado exitosamente.");
         });
 
         btnLimpiarReserva.addActionListener((ActionEvent e) -> {
-            textField1.setText("");
-            textField3.setText("");
-            fecha.setText("");
-            fecha2.setText("");
+            textFieldNombre.setText("");
+            textFieldEmail.setText("");
+            textFieldCheckin.setText("");
+            textFieldCheckout.setText("");
         });
 
         btnVolver.addActionListener((ActionEvent e) -> {
@@ -240,14 +243,14 @@ public class Nuevo extends JFrame {
         
         if (!error) {
             
-            String nombre = textField1.getText();
-            String correo = textField3.getText();
-            String habitacion = comboBox.getSelectedItem().toString();
-            String checkIn = fecha.getText();
-            String checkOut = fecha2.getText();
+            String nombre = textFieldNombre.getText();
+            String correo = textFieldId.getText();
+            String habitacion = comboBoxHabitacion.getSelectedItem().toString();
+            String checkIn = textFieldCheckin.getText();
+            String checkOut = textFieldCheckout.getText();
 
             // Obtener el ID del TextField
-            int id = Integer.parseInt(textField2.getText());
+            int id = Integer.parseInt(textFieldId.getText());
             
             try {
                 archivo.write(id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut + "\r\n");

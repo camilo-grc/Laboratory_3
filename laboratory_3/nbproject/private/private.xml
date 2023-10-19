@@ -3,12 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Oscar/OneDrive/Escritorio/Laboratory_3/laboratory_3/src/vista/ListadoFecha.java</file>
             <file>file:/C:/Users/Oscar/OneDrive/Escritorio/Laboratory_3/laboratory_3/src/vista/ListadoGeneral.java</file>
             <file>file:/C:/Users/Oscar/OneDrive/Escritorio/Laboratory_3/laboratory_3/src/vista/Nuevo.java</file>
             <file>file:/C:/Users/Oscar/OneDrive/Escritorio/Laboratory_3/laboratory_3/src/controlador/ControlMenuPrincipal.java</file>
             <file>file:/C:/Users/Oscar/OneDrive/Escritorio/Laboratory_3/laboratory_3/src/vista/ListadoHabitacion.java</file>
             <file>file:/C:/Users/Oscar/OneDrive/Escritorio/Laboratory_3/laboratory_3/src/vista/Listados.java</file>
+=======
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/vista/MenuPrincipal.java</file>
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/vista/Consultar.java</file>
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/controlador/herramientas.java</file>
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/vista/Login.java</file>
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/vista/Actualizar.java</file>
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/vista/Nuevo.java</file>
+            <file>file:/C:/Users/kmilo/OneDrive/Desktop/code/Laboratory_3/laboratory_3/src/modelo/Cliente.java</file>
+>>>>>>> 41e5c5df73facd3c17b05181285dd151aa3ee316
         </group>
     </open-files>
 </project-private>
