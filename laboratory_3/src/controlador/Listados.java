@@ -9,7 +9,7 @@ Ult. fecha modificacion: 19/10/2023
 Version 2.0
 */
 
-package controlador;
+package vista;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

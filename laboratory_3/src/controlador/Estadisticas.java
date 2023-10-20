@@ -15,8 +15,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.GraficoBarras;
+import vista.GraficoBarras;
+import vista.GraficoLineas;
 import vista.GraficoLineas;
 import vista.GraficoTorta;
+import vista.GraficoTorta;
+import vista.MenuPrincipal;
 import vista.MenuPrincipal;
 
 public class Estadisticas extends JFrame {

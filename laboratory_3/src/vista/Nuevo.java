@@ -11,9 +11,8 @@ Version 2.0
 
 package vista;
 
-import vista.LimitadorCaracteres;
+import controlador.LimitadorCaracteres;
 import controlador.herramientas;
-import modelo.Cliente;
 import vista.MenuPrincipal;
 
 import java.io.File;

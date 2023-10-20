@@ -11,18 +11,13 @@ Version 2.0
 
 package vista;
 
+import controlador.LimitadorCaracteres;
 import controlador.herramientas;
+import controlador.ControlActualizar;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -39,14 +34,18 @@ public class Actualizar extends JFrame {
     JTextField textFieldId, textFieldNombre, textFieldEmail;
     JComboBox<String> comboBoxHabitacion;
     JTextField fechaCheckIn, fechaCheckOut;
+    
+    ControlActualizar controlActualizar;
 
     public Actualizar(MenuPrincipal mm) {
         super("Modificar Cliente");
         this.mm = mm;
-        setSize(400, 500); // Ajustado el ancho del JFrame
+        setSize(400, 500); 
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);
+        
+        controlActualizar = new ControlActualizar();
 
         createGUI();
 
@@ -136,102 +135,46 @@ public class Actualizar extends JFrame {
         add(btnCancelar);
         add(mensajeLabel);
 
-        // Acciones de los botones
         btnBuscar.addActionListener((ActionEvent e) -> {
             int _id = Integer.parseInt(textFieldId.getText());
-            boolean encontrado = actualizarReservacion(_id);
-            
-            if (!encontrado) {
-            
-                JOptionPane.showMessageDialog(null, "Reservacion no encontrada");
+            String reservacion = controlActualizar.buscarReservacion(_id);
+
+            if (reservacion.equals("-")) {
+                JOptionPane.showMessageDialog(null, "Reservación no encontrada");
                 textFieldNombre.setEditable(false);
                 btnGuardarModificacion.setEnabled(false);
                 textFieldEmail.setEditable(false);
                 comboBoxHabitacion.setEnabled(false);
                 fechaCheckIn.setEditable(false);
                 fechaCheckOut.setEditable(false);
-            
             } else {
-            
-                actualizarReservacion(_id);
-            
-                textFieldId.setEditable(false);
+                // Parsea los datos de la reservación y establece los campos en la interfaz
+                // Luego habilita los campos para edición
+                // ...
                 textFieldNombre.setEditable(true);
                 btnGuardarModificacion.setEnabled(true);
                 textFieldEmail.setEditable(true);
                 comboBoxHabitacion.setEnabled(true);
                 fechaCheckIn.setEditable(true);
                 fechaCheckOut.setEditable(true);
-            
             }
         });
 
         btnGuardarModificacion.addActionListener((ActionEvent e) -> {
             int _id = Integer.parseInt(textFieldId.getText());
-            actualizar(_id);
-            mensajeLabel.setText("Modificación exitosa.");
+            String nombre = textFieldNombre.getText();
+            String correo = textFieldEmail.getText();
+            String habitacion = comboBoxHabitacion.getSelectedItem().toString();
+            String checkIn = fechaCheckIn.getText();
+            String checkOut = fechaCheckOut.getText();
+
+            controlActualizar.actualizarReservacion(_id, nombre, correo, habitacion, checkIn, checkOut);
+            JOptionPane.showMessageDialog(null, "Modificación exitosa.");
         });
 
         btnCancelar.addActionListener((ActionEvent e) -> {
             setVisible(false);
         });
     }
-    
-    public boolean actualizarReservacion(int idBuscar) {
-        herramientas obj = new herramientas();
-
-        String reservacion = obj.buscarReservacion(idBuscar);
-
-        if (reservacion == "-") {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
-    public void actualizar(int idBuscar) {
-        try {
-                BufferedReader lectura = new BufferedReader(new FileReader("datos.csv"));
-                ArrayList<String> reservaciones = new ArrayList<>();
-                String fila;
-
-                // Leer todas las líneas del archivo y guardarlas en la lista de reservaciones
-                while ((fila = lectura.readLine()) != null) {
-                    reservaciones.add(fila);
-                }
-
-                lectura.close();
-
-                int lineaAModificar = idBuscar - 1; // Resta 1 al índice
-
-                if (lineaAModificar >= 0 && lineaAModificar < reservaciones.size()) {
-                    String nombre = textFieldNombre.getText();
-                    String correo = textFieldEmail.getText();
-                    String habitacion = comboBoxHabitacion.getSelectedItem().toString();
-                    String checkIn = fechaCheckIn.getText();
-                    String checkOut = fechaCheckOut.getText();
-                    String id = idBuscar + "";
-                    
-                    String nuevaLinea = id + ";" + nombre + ";" + habitacion + ";" + correo + ";" + checkIn + ";" + checkOut;
-
-                    // Reemplazar la línea modificada en la lista de reservaciones
-                    reservaciones.set(lineaAModificar, nuevaLinea);
-
-                    // Sobrescribir el archivo con las reservaciones actualizadas
-                    BufferedWriter escritor = new BufferedWriter(new FileWriter("datos.csv"));
-                    for (String linea : reservaciones) {
-                        escritor.write(linea);
-                        escritor.newLine();
-                    }
-                    escritor.close();
-
-                    JOptionPane.showMessageDialog(null, "Modificación exitosa.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Reservación no encontrada");
-                }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error al intentar leer o escribir en el archivo");
-            }
-        }
-    }
+}
 

@@ -9,7 +9,7 @@ Ult. fecha modificacion: 19/10/2023
 Version 2.0
 */
 
-package vista;
+package controlador;
 
 public class LimitadorCaracteres extends javax.swing.text.PlainDocument
 {

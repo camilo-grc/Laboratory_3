@@ -11,7 +11,6 @@ Version 2.0
 
 package vista;
 
-import modelo.Cliente;
 import controlador.ControlMenuPrincipal;
 
 // import org.jfree.chart.ChartFactory;
@@ -19,7 +18,6 @@ import controlador.ControlMenuPrincipal;
 // import org.jfree.chart.JFreeChart;
 //import org.jfree.data.category.DefaultCategoryDataset;
 
-import modelo.Cliente;
 import controlador.ControlMenuPrincipal;
 
 import javax.swing.JButton;
@@ -34,7 +32,6 @@ public class MenuPrincipal extends JFrame {
     
     public JButton btnReserva, btnConsultar, btnActualizar, btnAcerca, btnLogin, btnListados, btnEstadisticas;
     public JLabel jlTexto;
-    public ArrayList<Cliente> clients = new ArrayList<>();
     
     public MenuPrincipal() {
         super("Forest Suites");

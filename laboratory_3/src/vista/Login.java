@@ -11,6 +11,8 @@ Version 2.0
 
 package vista;
 
+import controlador.ControlLogin;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -25,11 +27,14 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 public class Login extends JFrame{
-        JTextField jtLogin;
+    
+    JTextField jtLogin;
     JPasswordField jpPassw;
-    JToggleButton jtVer; // para ver u ocultar el password
+    JToggleButton jtVer; 
     JButton jbCancelar, jbIngresar;
     ImageIcon ver, no_ver;
+    
+    ControlLogin controlLogin;
     
     public Login(){
         super("Log-in");
@@ -38,6 +43,9 @@ public class Login extends JFrame{
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
+        
+        controlLogin = new ControlLogin();
+        
         crearGUI();
         
         System.out.println("Usuario: root \nContrasena: 123456"); // mostrar
@@ -135,21 +143,20 @@ public class Login extends JFrame{
         jpPassw.requestFocus(); // poner el cursor en el JPasswordField
     }
     
-    public void evento_validar(){
+    public void evento_validar() {
         String login = jtLogin.getText();
-        char caracteres[] = jpPassw.getPassword(); // obtener los caracteres escritos en el JPasswordField como un arreglo de tipo char[]
-        String passw = String.valueOf(caracteres); // convertir el arreglo char[] a String
- 
-        
-        if(login.equals("") || passw.equals("")){
-            JOptionPane.showMessageDialog(this, "Login y/o password no pueden ser vacios");
-        }else{
-            if(login.equals("root") && passw.equals("123456")){
+        char[] caracteres = jpPassw.getPassword();
+        String passw = String.valueOf(caracteres);
+
+        if (login.equals("") || passw.equals("")) {
+            JOptionPane.showMessageDialog(this, "Login y/o password no pueden ser vacíos");
+        } else {
+            if (controlLogin.validarCredenciales(login, passw)) {
                 MenuPrincipal mm = new MenuPrincipal();
                 setVisible(false);
-            }else{
-                JOptionPane.showMessageDialog(this, 
-                        "Ingreso incorrecto. Login y/o password incorrecto",
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Ingreso incorrecto. Login y/o password incorrectos",
                         "Error",
                         JOptionPane.WARNING_MESSAGE);
             }

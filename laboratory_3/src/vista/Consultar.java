@@ -12,14 +12,11 @@ Version 2.0
 package vista;
 
 import controlador.herramientas;
-import modelo.Cliente;
+import controlador.ControlConsultar;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -81,50 +78,45 @@ public class Consultar extends JFrame {
         mensajeLabel.setForeground(Color.GRAY);
         add(mensajeLabel);
         
-        
         btnConsultar.addActionListener((ActionEvent e) -> {
-        String _id = idTextField.getText(); // Obtener el ID cuando se presiona el botón
-        if (!_id.isEmpty()) {
-            int idBuscar = Integer.parseInt(_id); // Convertir a entero
-            mostrarReservacion(idBuscar);
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID válido.");
-        }
-    });
+            String _id = idTextField.getText();
+            if (!_id.isEmpty()) {
+                int idBuscar = Integer.parseInt(_id);
+                mostrarReservacion(idBuscar);
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID válido.");
+            }
+        });
 
         btnLimpiar.addActionListener((ActionEvent e) -> {
             idTextField.setText("");
-            mensajeLabel.setText(""); // Limpiar mensaje
+            mensajeLabel.setText("");
         });
 
         btnVolver.addActionListener((ActionEvent e) -> {
             setVisible(false);
         });
+
     }
 
     
         
     public void mostrarReservacion(int idBuscar) {
-        herramientas obj = new herramientas();
+        ControlConsultar controlConsultar = new ControlConsultar();
+        String reservacion = controlConsultar.buscarReservacion(idBuscar);
 
-        String reservacion = obj.buscarReservacion(idBuscar);
-        
-        if (reservacion == "-") {
-            JOptionPane.showMessageDialog(null, "Reservacion no encontrada");
+        if (reservacion.equals("-")) {
+            JOptionPane.showMessageDialog(null, "Reservación no encontrada");
         } else {
-            String campos[] = new String[6];
-            for (int i = 0; i < 6; i++) {
-                campos = reservacion.split(";");
-            }
-            
+            String campos[] = reservacion.split(";");
             int id = Integer.parseInt(campos[0]);
             String nombre = campos[1];
             String habitacion = campos[2];
             String correo = campos[3];
             String check_in = campos[4];
             String check_out = campos[5];
-            
-            JOptionPane.showMessageDialog(null, "Nombre = " + nombre + "\n" + "ID = " + id + "\n" + "Correo = " + correo + "\n" + "Habitacion = " + habitacion + "\n" + "Check-In = " + check_in + "\n" + "Check-Out = " + check_out);
+
+            JOptionPane.showMessageDialog(null, "Nombre = " + nombre + "\n" + "ID = " + id + "\n" + "Correo = " + correo + "\n" + "Habitación = " + habitacion + "\n" + "Check-In = " + check_in + "\n" + "Check-Out = " + check_out);
         }
     }
 }
