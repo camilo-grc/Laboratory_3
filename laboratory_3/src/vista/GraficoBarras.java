@@ -1,4 +1,3 @@
-
 package vista;
 
 import org.jfree.chart.ChartFactory;
@@ -11,13 +10,14 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class GraficoBarras extends JFrame {
 
     JFreeChart chart;
 
     public GraficoBarras() {
-        super("Gráfico de Tipos de Habitaciones");
+        super("Gráfico de Reservas por Duración de Estadía");
         setSize(800, 600);
         setLocationRelativeTo(null);
 
@@ -33,11 +33,10 @@ public class GraficoBarras extends JFrame {
     public void crearGrafico() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        // Contadores para cada tipo de habitación
-        int contadorSuite = 0;
-        int contadorMatrimonial = 0;
-        int contadorIndividual = 0;
-        int contadorDoble = 0;
+        // Inicializar contadores para cada duración de estadía
+        int unoATresDias = 0;
+        int cuatroASieteDias = 0;
+        int masDeSieteDias = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader("datos.csv"))) {
             String line;
@@ -45,23 +44,19 @@ public class GraficoBarras extends JFrame {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(";");
                 if (parts.length >= 3) {
-                    String tipoHabitacion = parts[2].trim();
+                    String checkin = parts[4].trim();
+                    String checkout = parts[5].trim();
 
-                    // Incrementar el contador para el tipo de habitación correspondiente
-                    switch (tipoHabitacion) {
-                        case "Suite":
-                            contadorSuite++;
-                            break;
-                        case "Matrimonial":
-                            contadorMatrimonial++;
-                            break;
-                        case "Individual":
-                            contadorIndividual++;
-                            break;
-                        case "Doble":
-                            contadorDoble++;
-                            break;
-                        // Puedes agregar más casos para otros tipos de habitaciones si es necesario
+                    // Calcular la duración de estadía en días
+                    int duracion = calcularDuracionEstadia(checkin, checkout);
+
+                    // Incrementar el contador correspondiente
+                    if (duracion >= 1 && duracion <= 3) {
+                        unoATresDias++;
+                    } else if (duracion >= 4 && duracion <= 7) {
+                        cuatroASieteDias++;
+                    } else {
+                        masDeSieteDias++;
                     }
                 }
             }
@@ -70,22 +65,37 @@ public class GraficoBarras extends JFrame {
         }
 
         // Agregar los contadores al conjunto de datos
-        dataset.addValue(contadorSuite, "Cantidad", "Suite");
-        dataset.addValue(contadorMatrimonial, "Cantidad", "Matrimonial");
-        dataset.addValue(contadorIndividual, "Cantidad", "Individual");
-        dataset.addValue(contadorDoble, "Cantidad", "Doble");
+        dataset.addValue(unoATresDias, "Cantidad de Reservas", "1-3 Días");
+        dataset.addValue(cuatroASieteDias, "Cantidad de Reservas", "4-7 Días");
+        dataset.addValue(masDeSieteDias, "Cantidad de Reservas", "Más de 7 Días");
 
         // Crear el gráfico de barras
         chart = ChartFactory.createBarChart(
-                "Cantidad de Tipos de Habitaciones",
-                "Tipo de Habitación",
-                "Cantidad",
+                "Cantidad de Reservas por Duración de Estadía",
+                "Duración de Estadía (Días)",
+                "Cantidad de Reservas",
                 dataset,
                 PlotOrientation.VERTICAL,
                 true,
                 true,
                 false
         );
+    }
+
+    private int calcularDuracionEstadia(String checkin, String checkout) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            java.util.Date fechaCheckin = dateFormat.parse(checkin);
+            java.util.Date fechaCheckout = dateFormat.parse(checkout);
+            long diferenciaMillis = fechaCheckout.getTime() - fechaCheckin.getTime();
+            int diferenciaDias = (int) (diferenciaMillis / (1000 * 60 * 60 * 24));
+            return diferenciaDias;
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     public static void main(String[] args) {
